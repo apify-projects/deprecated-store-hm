@@ -1,6 +1,5 @@
 import { createCheerioRouter, Request } from 'crawlee';
 import { Actor } from 'apify';
-import { getTimestampString } from 'pandora-shared-utils';
 import {
     BASE_URL,
     COMPANY,
@@ -19,7 +18,7 @@ import {
     getProductInfoObject,
     getCategoriesFromNavigation,
 } from './extractors.js';
-import { getBaseProductId, getMainImageFromMiniature, isCodeEnglish } from './tools.js';
+import { getBaseProductId, getMainImageFromMiniature } from './tools.js';
 import actorStatistics from './actor_statistics.js';
 
 export const router = createCheerioRouter();
@@ -125,8 +124,7 @@ router.addHandler(Labels.PRODUCT, async ({ log, request, $, body }) => {
     const { divisionName, categoryName, country, label } = request.userData;
     log.info(`${label}: country: ${country.name} - ${request.loadedUrl}`);
 
-    const isEnglish = isCodeEnglish(country.code);
-    const timestamp = getTimestampString(new Date());
+    const timestamp = new Date().toISOString()
 
     const {
         productName,
@@ -184,13 +182,10 @@ router.addHandler(Labels.PRODUCT, async ({ log, request, $, body }) => {
             salePrice,
             currency: country.currency,
             priceDifferenceFromLastScrape: priceChange !== 0 ? priceChange : null,
-            metal: null,
-            stone: null,
             description,
             url: url.toString(),
             imageUrl,
             timestamp,
-            isEnglish,
         };
     });
 

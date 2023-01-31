@@ -2,14 +2,16 @@ import { Request } from 'crawlee';
 import { BASE_URL, COUNTRIES, Labels } from './constants.js';
 import { getMockStartUrls } from './debug.js';
 
-export const getStartUrls = (useMockStartRequests: boolean | undefined): Request[] => {
+export const getStartUrls = (useMockStartRequests: boolean | undefined, inputCountry: string | undefined): Request[] => {
     if (useMockStartRequests) return getMockStartUrls();
 
-    return getProductionStartUrls();
+    return getProductionStartUrls(inputCountry);
 };
 
-export const getProductionStartUrls = (): Request[] => {
-    return COUNTRIES.map((country) => {
+export const getProductionStartUrls = (inputCountry:string | undefined): Request[] => {
+    const inputCountryDetails = COUNTRIES.filter(countryDetails => countryDetails.name === inputCountry)
+
+    return inputCountryDetails.map((country) => {
         return new Request({
             url: `${BASE_URL}/${country.code}/apis/navigation/v1/nav-data.json`,
             userData: {
@@ -20,7 +22,6 @@ export const getProductionStartUrls = (): Request[] => {
     });
 };
 
-export const isCodeEnglish = (code: string): boolean => code.startsWith('en_');
 
 export const getMainImageFromMiniature = (imageUrl: string) => {
     const fullImage = imageUrl.replace('miniature', 'main');

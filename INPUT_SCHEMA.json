@@ -3,17 +3,14 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "debug": {
-            "title": "Debug mode",
-            "type": "boolean",
-            "description": "Debug level logging will be set",
-            "default": false
-        },
-        "useMockRequests": {
-            "title": "Mock start requests",
-            "type": "boolean",
-            "description": "Mock starting requests will be used",
-            "default": false
+        "inputCountry":{
+            "title": "Country",
+            "type": "string",
+            "description": "Select country",
+            "editor": "select",
+            "default": "UNITED KINGDOM",
+            "enum": ["UNITED KINGDOM", "USA", "ITALY","GERMANY","FRANCE","AUSTRALIA","SPAIN","CANADA","MEXICO"],
+            "enumTitles": ["UNITED KINGDOM", "USA", "ITALY","GERMANY","FRANCE","AUSTRALIA","SPAIN","CANADA","MEXICO"]
         }
     }
 }

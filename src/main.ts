@@ -10,9 +10,19 @@ await Actor.init();
 interface InputSchema {
     debug?: boolean,
     useMockRequests?: boolean,
+    inputCountry?: string,
 }
-const { debug, useMockRequests } = (await Actor.getInput<InputSchema>()) ?? {};
-const startUrls = getStartUrls(useMockRequests);
+const { inputCountry } = (await Actor.getInput<InputSchema>()) ??
+{
+    "inputCountry": "UNITED KINGDOM",
+};
+
+//debugging tools
+const debug = false
+const useMockRequests = false
+//
+
+const startUrls = getStartUrls(useMockRequests, inputCountry);
 
 if (debug) {
     log.setLevel(LogLevel.DEBUG);
