@@ -1,0 +1,19 @@
+{
+    "title": "HM.com actor",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "debug": {
+            "title": "Debug mode",
+            "type": "boolean",
+            "description": "Debug level logging will be set",
+            "default": false
+        },
+        "useMockRequests": {
+            "title": "Mock start requests",
+            "type": "boolean",
+            "description": "Mock starting requests will be used",
+            "default": false
+        }
+    }
+}
